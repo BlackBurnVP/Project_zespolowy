@@ -2,29 +2,16 @@ package com.example.vitalii.myapplication
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.widget.EditText
-import com.example.vitalii.myapplication.api.GitHubPOJO
-import com.example.vitalii.myapplication.api.GitHubService
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.ArrayList
 import android.content.Intent
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import android.app.Activity
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.navigation.NavDestination
 
 
-open class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(){
 
     private lateinit var navController: NavController
     private lateinit var mNavView:NavigationView
@@ -63,6 +50,14 @@ open class MainActivity : AppCompatActivity(){
         navController = this.findNavController(R.id.myNavHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navController,mDrawerLayout)
         NavigationUI.setupWithNavController(mNavView, navController)
+
+        navController.addOnNavigatedListener { nc: NavController, nd: NavDestination ->
+            if (nd.id == nc.graph.startDestination) {
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

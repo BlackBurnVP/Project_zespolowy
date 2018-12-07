@@ -13,4 +13,5 @@
         you can open certain repository in your browser right from the app
     </string>
     <string name="credentials_text">App was created by Vitalii Pshenychniuk aka BlackBurn</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 </resources>
